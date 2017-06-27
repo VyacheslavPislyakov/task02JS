@@ -5,7 +5,7 @@ function Vegetables(name, color, weight) {
 	this.weight = weight;
 };
 Vegetables.prototype.getName = function () {
-	return this.name + " " + this.color + " " + this.weight;
+	return this.name;
 };
 
 //Class Homemade Vegetables
@@ -13,14 +13,12 @@ function HomeVegetables(name, color, weight) {
 	Vegetables.call(this, arguments);
 	this.category = "Homemade Vegetables";
 };
-HomeVegetables.prototype = new Vegetables();
 
 //Class Exotic Vegetables
 function ExoticVegetables(name, color, weight) {
 	Vegetables.call(this, arguments);
 	this.category = "Exotic Vegetables"
 };
-ExoticVegetables.prototype = new Vegetables();
 
 //Class Potato
 function Potato() {
@@ -30,9 +28,14 @@ function Potato() {
 	this.color = "red";
 	this.calories = 375;
 };
+Potato.prototype = new Vegetables();
+
+
+
+
 
 var potato = new Potato();
-console.log(potato);
+console.log(potato.getName());
 
 
 // var veg1 = new HomeVegetables("Potato", "red", 250);
