@@ -10,84 +10,63 @@ Vegetables.prototype.getName = function () {
 
 //Class Nightshade Vegetables
 function NightshadeVeg(name, weight) {
-	Vegetables.call(this, arguments);
+	Vegetables.call(this, name, weight);
 	this.category = "Nightshade Vegetables";
 };
+NightshadeVeg.prototype = new Vegetables();
 
 //Class Root Vegetables
 function RootVeg(name, weight) {
-	Vegetables.call(this, arguments);
+	Vegetables.call(this, name, weight);
 	this.category = "Root Vegetables";
 };
+RootVeg.prototype = new Vegetables();
 
 //Class Cucurbitaceae Vegetables
 function CucurbitaceaeVeg(name, weight) {
-	Vegetables.call(this, arguments);
+	Vegetables.call(this, name, weight);
 	this.category = "Cucurbitaceae Vegetables";
 }
+CucurbitaceaeVeg.prototype = new Vegetables();
 
 //Class Tomato
-function Tomato(weight) {
-	NightshadeVeg.call(this, arguments);
-	this.name = "Tomato";
-	this.weight = weight;
+function Tomato(name, weight, calories) {
+	NightshadeVeg.call(this, name, weight);
 	this.calories = 75;
 };
 Tomato.prototype = new NightshadeVeg();
 
 //Class eggplant
-function Eggplant(weight) {
-	NightshadeVeg.call(this, arguments);
-	this.name = "Eggplant";
-	this.weight = weight;
+function Eggplant(name, weight, calories) {
+	NightshadeVeg.call(this, name, weight);
 	this.calories = 375;
 };
 Eggplant.prototype = new NightshadeVeg();
 
 //Class Carrot
-function Carrot(weight){
-	RootVeg.call(this, arguments);
-	this.name = "Carrot";
-	this.weight = weight;
+function Carrot(name, weight, calories){
+	RootVeg.call(this, name, weight);
 	this.calories = 130;
 }
 Carrot.prototype = new RootVeg();
 
 //Class Beet
-function Beet(weight){
-	RootVeg.call(this, arguments);
-	this.name = "Beet";
-	this.weight = weight;
+function Beet(name, weight, calories){
+	RootVeg.call(this, name, weight);
 	this.calories = 230;
 }
 Beet.prototype = new RootVeg();
 
 //Class Pumpkin
-function Pumpkin(weight) {
-	CucurbitaceaeVeg.call(this, arguments);
-	this.name = "Pumpkin";
-	this.weight = weight;
+function Pumpkin(name, weight, calories) {
+	CucurbitaceaeVeg.call(this, name, weight);
 	this.calories = 330;
 }
 Pumpkin.prototype = new CucurbitaceaeVeg();
 
 //Class Cucumber
-function Cucumber(weight) {
-	CucurbitaceaeVeg.call(this, arguments);
-	this.name = "Cucumber";
-	this.weight = weight;
+function Cucumber(name, weight, calories) {
+	CucurbitaceaeVeg.call(this, name, weight);
 	this.calories = 30;
 }
 Cucumber.prototype = new CucurbitaceaeVeg();
-
-//Class Salad
-// function Salad() {
-// 	var arrayProducts = [];
-// };
-//
-// Salad.prototype.addProduct = function (vegetable) {
-// 	arrayProducts.push(vegetable)
-// }
-
-var cuc = new Cucumber(200);
-console.log(cuc);
