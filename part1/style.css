@@ -1,0 +1,19 @@
+.caption{
+	/*position: absolute;*/
+	margin: auto;
+	border: solid black 1px;
+	width: 500px;
+	text-align: center;
+}
+
+#recipe{
+	position: absolute;
+	top: 100px;
+	border: solid black 1px;
+	width: 500px;
+	text-align: center;
+}
+
+#recipeList{
+	text-align: left;
+}
