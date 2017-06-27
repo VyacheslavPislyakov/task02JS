@@ -1,42 +1,42 @@
-var Cabbage = function (name, weight, color) {
+//Class Vegetables
+function Vegetables(name, color, weight) {
 	this.name = name;
-	this.weight = weight;
 	this.color = color;
-	this.category = "Homemade vegetables";
-	this.calories = 75;
-	this.getAll = function () {
-		return this.name + " " + this.weight + " " + this.color + " " + this.category + " " + this.calories;
-	};
-
+	this.weight = weight;
+};
+Vegetables.prototype.getName = function () {
+	return this.name + " " + this.color + " " + this.weight;
 };
 
-var Carrot = function (name, weight, color) {
-	this.name = name;
-	this.weight = weight;
-	this.color = color;
-	this.category = "Homemade vegetables";
-	this.calories = 52;
-	this.getAll = function () {
-		return this.name + " " + this.weight + " " + this.color + " " + this.category + " " + this.calories;
-	};
+//Class Homemade Vegetables
+function HomeVegetables(name, color, weight) {
+	Vegetables.call(this, arguments);
+	this.category = "Homemade Vegetables";
+};
+HomeVegetables.prototype = new Vegetables();
 
+//Class Exotic Vegetables
+function ExoticVegetables(name, color, weight) {
+	Vegetables.call(this, arguments);
+	this.category = "Exotic Vegetables"
+};
+ExoticVegetables.prototype = new Vegetables();
+
+//Class Potato
+function Potato() {
+	HomeVegetables.call(this, arguments);
+	this.name = "Potato";
+	this.weight = 300;
+	this.color = "red";
+	this.calories = 375;
 };
 
-var Aubergine = function (name, weight, color) {
-	this.name = name;
-	this.weight = weight;
-	this.color = color;
-	this.category = "Exotic vegetables";
-	this.calories = 152;
-	this.getAll = function () {
-		return this.name + " " + this.weight + " " + this.color + " " + this.category + " " + this.calories;
-	};
+var potato = new Potato();
+console.log(potato);
 
-};
 
-var cabbage = new Cabbage("Cabbage", 300, "white");
-var carrot = new Carrot("Carrot", 200, "white");
-var aubergine = new Aubergine("Aubergine", 500, "white");
-console.log(cabbage.getAll());
-console.log(carrot.getAll());
-console.log(aubergine.getAll());
+// var veg1 = new HomeVegetables("Potato", "red", 250);
+// var veg2 = new ExoticVegetables("Avocado", "green", 350);
+
+// console.log(veg1);
+// console.log(veg2);
