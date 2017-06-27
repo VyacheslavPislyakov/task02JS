@@ -8,10 +8,6 @@ Vegetables.prototype.getName = function () {
 	return this.name;
 };
 
-Vegetables.prototype.setCategory = function (category) {
-	this.category = category;
-};
-
 //Class Nightshade Vegetables
 function NightshadeVeg(name, weight) {
 	Vegetables.call(this, arguments);
@@ -30,74 +26,68 @@ function CucurbitaceaeVeg(name, weight) {
 	this.category = "Cucurbitaceae Vegetables";
 }
 
-
 //Class Tomato
-function Tomato() {
+function Tomato(weight) {
 	NightshadeVeg.call(this, arguments);
 	this.name = "Tomato";
-	this.weight = 100;
+	this.weight = weight;
 	this.calories = 75;
 };
-Tomato.prototype = new Vegetables();
+Tomato.prototype = new NightshadeVeg();
 
 //Class eggplant
-function Eggplant() {
+function Eggplant(weight) {
 	NightshadeVeg.call(this, arguments);
 	this.name = "Eggplant";
-	this.weight = 100;
+	this.weight = weight;
 	this.calories = 375;
 };
-Eggplant.prototype = new Vegetables();
+Eggplant.prototype = new NightshadeVeg();
 
 //Class Carrot
-function Carrot(){
+function Carrot(weight){
 	RootVeg.call(this, arguments);
 	this.name = "Carrot";
-	this.weight = 100;
+	this.weight = weight;
 	this.calories = 130;
 }
-Carrot.prototype = new Vegetables();
+Carrot.prototype = new RootVeg();
 
 //Class Beet
-function Beet(){
+function Beet(weight){
 	RootVeg.call(this, arguments);
 	this.name = "Beet";
-	this.weight = 100;
+	this.weight = weight;
 	this.calories = 230;
 }
-Beet.prototype = new Vegetables();
+Beet.prototype = new RootVeg();
 
 //Class Pumpkin
-function Pumpkin() {
+function Pumpkin(weight) {
 	CucurbitaceaeVeg.call(this, arguments);
 	this.name = "Pumpkin";
-	this.weight = 100;
+	this.weight = weight;
 	this.calories = 330;
 }
+Pumpkin.prototype = new CucurbitaceaeVeg();
 
 //Class Cucumber
-function Cucumber() {
+function Cucumber(weight) {
 	CucurbitaceaeVeg.call(this, arguments);
 	this.name = "Cucumber";
-	this.weight = 100;
+	this.weight = weight;
 	this.calories = 30;
 }
+Cucumber.prototype = new CucurbitaceaeVeg();
 
+//Class Salad
+// function Salad() {
+// 	var arrayProducts = [];
+// };
+//
+// Salad.prototype.addProduct = function (vegetable) {
+// 	arrayProducts.push(vegetable)
+// }
 
-
-
-
-var tomato = new Tomato();
-console.log(tomato);
-console.log(tomato.getName());
-
-var eggplant = new Eggplant();
-console.log(eggplant);
-console.log(eggplant.getName());
-
-
-// var veg1 = new HomeVegetables("Potato", "red", 250);
-// var veg2 = new ExoticVegetables("Avocado", "green", 350);
-
-// console.log(veg1);
-// console.log(veg2);
+var cuc = new Cucumber(200);
+console.log(cuc);
