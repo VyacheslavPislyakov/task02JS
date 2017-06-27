@@ -1,8 +1,7 @@
 .caption{
-	/*position: absolute;*/
 	margin: auto;
 	border: solid black 1px;
-	width: 500px;
+	width: 100%;
 	text-align: center;
 }
 
@@ -12,8 +11,23 @@
 	border: solid black 1px;
 	width: 500px;
 	text-align: center;
+	padding: 30px;
 }
 
 #recipeList{
 	text-align: left;
+}
+#buttons{
+	top: 100px;
+	border: solid black 1px;
+	position: absolute;
+	width: 300px;
+	/*height: 300px;*/
+	left: 80%;
+	text-align: center;
+	padding: 30px;
+}
+
+input{
+	margin: 10px;
 }

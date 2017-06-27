@@ -3,8 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<title>patr1</title>
-		<script src="script.js" defer></script>
-		<!-- <script src="salad.js" defer></script> -->
+		<script src="script.js"></script>
 		<link rel="stylesheet" href="style.css">
 	</head>
 	<body>
@@ -12,14 +11,17 @@
 			<h1>Наш ресторан</h1>
 		</div>
 		<div id="recipe">
-			<h1>Рецепт салата</h1>
+			<h1>Рецепт летнего салата</h1>
 			<ul id="recipeList">
-
 			</ul>
+		</div>
+		<div id="buttons">
+			<h1>Кнопочки выбора</h1>
+			<input type="button" name="button" id="buttonCalories" value="Вывести рецепт салата" onclick="cs.getRecipe()"></input>
+			<input type="button" name="button" id="buttonCalories" value="Посчитать калорийность" onclick="cs.getTotalCalories()"></input>
 		</div>
 		<div class="">
 
 		</div>
-
 	</body>
 </html>
