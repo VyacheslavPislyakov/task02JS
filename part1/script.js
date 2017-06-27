@@ -88,7 +88,7 @@ CreateSalad.prototype.getRecipe = function() {
 		if (cs.getListProducts()[i].hasOwnProperty("calories")) {
 			var insertLi = document.createElement("li");
 			insertLi.innerHTML = cs.getListProducts()[i].name + " " + cs.getListProducts()[i].weight + " г.";
-			recipeList.appendChild(insertLi);
+			document.getElementById("recipeList").appendChild(insertLi);
 		}
 	}
 };
@@ -113,14 +113,15 @@ var cs = new CreateSalad();
 cs.addProduct(new Cucumber("Огурец", 200, 35));
 cs.addProduct(new Carrot("Морковка", 300, 335));
 cs.addProduct(new Pumpkin("Тыква", 100, 50));
+// cs.getRecipe();
 console.log(cs.getListProducts());
 
-var sortProducts = cs.getListProducts();
-sortProducts.sort(compareCalories);
-console.log(sortProducts);
+// var sortProducts = cs.getListProducts();
+// sortProducts.sort(compareCalories);
+// console.log(sortProducts);
 
 // var buttonCalories = document.getElementById("buttonCalories");
-// buttonCalories.addEventListener("click", cs.getTotalCalories());
+// buttonCalories.addEventListener("click", cs.getRecipe());
 // console.log(cs.getTotalCalories());
 
 
