@@ -151,20 +151,13 @@ function findVegetables(listCurrentProducts) {
 	var flag = null;
 	var calories = parseInt(document.getElementById("caloriesVeg").value);
 	var color = document.getElementById("colorVeg").value;
-	console.log(calories + " " + color);
-	console.log(listCurrentProducts);
 	for (var i = 0; i < listCurrentProducts.length; i++) {
 		if ((listCurrentProducts[i].calories === calories) && (listCurrentProducts[i].color === color)) {
 			flag = true;
 			alert("Овощь с параметрами " + listCurrentProducts[i].calories + " ккал и " + listCurrentProducts[i].color + " цвета - " + listCurrentProducts[i].name);
 			break;
 		}
-		console.log(" arr calories   " + typeof listCurrentProducts[i].calories + " " + listCurrentProducts[i].calories);
-		console.log("const calories   " + typeof calories + " " + calories);
-		console.log(" arr color   " + typeof listCurrentProducts[i].color + " " + listCurrentProducts[i].color);
-		console.log("const color   " + typeof color + " " + color);
 	}
-
 	if (flag != true) {
 		alert("Нету такого овоща с параметрами " + calories + " ккал и " + color + " цвета");
 	}
@@ -206,22 +199,3 @@ var buttonFindVegetables = document.getElementById("buttonFindVegetables");
 buttonFindVegetables.addEventListener("click", function() {
 	findVegetables(listCurrentProducts);
 }, false);
-
-
-
-//function of create events of the buttons
-// function eventsOfButtnos(id, func) {
-// 	console.log(arguments[0]);
-// 	document.getElementById("\"" + arguments[0] + "\"");
-// 	arguments[0].addEventListener("click", function() {
-// 		func;
-// 	}, false);
-// }
-// console.log(eventsOfButtnos);
-
-// var func = cs.getRecipe(listCurrentProducts);
-// console.log(func);
-
-// var buttonRecipe = eventsOfButtnos("buttonRecipe", cs.getRecipe(listCurrentProducts));
-
-////убрать методы с prototype
