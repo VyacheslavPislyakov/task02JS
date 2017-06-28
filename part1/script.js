@@ -8,6 +8,7 @@ Vegetables.prototype.getName = function() {
 	return this.name;
 };
 
+
 //Class Nightshade Vegetables
 function NightshadeVeg(name, weight) {
 	Vegetables.call(this, name, weight);
@@ -29,45 +30,52 @@ function CucurbitaceaeVeg(name, weight) {
 }
 CucurbitaceaeVeg.prototype = new Vegetables();
 
+
 //Class Tomato
-function Tomato(name, weight, calories) {
+function Tomato(name, weight, calories, color) {
 	NightshadeVeg.call(this, name, weight);
 	this.calories = calories * (100 / weight);
+	this.color = color;
 }
 Tomato.prototype = new NightshadeVeg();
 
 //Class eggplant
-function Eggplant(name, weight, calories) {
+function Eggplant(name, weight, calories, color) {
 	NightshadeVeg.call(this, name, weight);
 	this.calories = calories * (100 / weight);
+	this.color = color;
 }
 Eggplant.prototype = new NightshadeVeg();
 
 //Class Carrot
-function Carrot(name, weight, calories) {
+function Carrot(name, weight, calories, color) {
 	RootVeg.call(this, name, weight);
 	this.calories = calories * (100 / weight);
+	this.color = color;
 }
 Carrot.prototype = new RootVeg();
 
 //Class Beet
-function Beet(name, weight, calories) {
+function Beet(name, weight, calories, color) {
 	RootVeg.call(this, name, weight);
 	this.calories = calories * (100 / weight);
+	this.color = color;
 }
 Beet.prototype = new RootVeg();
 
 //Class Pumpkin
-function Pumpkin(name, weight, calories) {
+function Pumpkin(name, weight, calories, color) {
 	CucurbitaceaeVeg.call(this, name, weight);
 	this.calories = calories * (100 / weight);
+	this.color = color;
 }
 Pumpkin.prototype = new CucurbitaceaeVeg();
 
 //Class Cucumber
-function Cucumber(name, weight, calories) {
+function Cucumber(name, weight, calories, color) {
 	CucurbitaceaeVeg.call(this, name, weight);
 	this.calories = calories * (100 / weight);
+	this.color = color;
 }
 Cucumber.prototype = new CucurbitaceaeVeg();
 
@@ -119,28 +127,43 @@ CreateSalad.prototype.getTotalCalories = function(listCurrentProducts) {
 	return this.totalCalories;
 };
 
+//find Vegetables
+function findVegetables(listProducts, calories, color) {
+	var flag = null;
+	for (var i = 0; i < listCurrentProducts.length; i++) {
+		if ((listCurrentProducts[i].calories === calories) && (listCurrentProducts[i].color == color)) {
+			flag = true;
+			alert("Овощь с параметрами " + listCurrentProducts[i].calories + " ккал и " + listCurrentProducts[i].color + " цвета - " + listCurrentProducts[i].name);
+			break;
+		}
+	}
+	if (flag != true){
+		alert("Нету такого овоща с параметрами " + listCurrentProducts[i].calories + " ккал и " + listCurrentProducts[i].color + " цвета");
+	}
+}
+
 //sort objects by calories
 function compareCalories(personA, personB) {
 	return personA.calories - personB.calories;
 }
 
-
 var cs = new CreateSalad();
-cs.addProduct(new Cucumber("Огурец", 200, 35));
-cs.addProduct(new Carrot("Морковка", 300, 335));
-cs.addProduct(new Pumpkin("Тыква", 100, 50));
-cs.addProduct(new Carrot("Морковка", 500, 335));
-cs.addProduct(new Pumpkin("Тыква", 350, 50));
-var listCurrentProducts = cs.getListProducts();
+cs.addProduct(new Cucumber("Огурец", 200, 10, "green"));
+cs.addProduct(new Carrot("Морковка", 300, 33, "orange"));
+cs.addProduct(new Pumpkin("Тыква", 100, 19, "ginger"));
+cs.addProduct(new Beet("Свеколочка", 350, 48, "purple"));
+cs.addProduct(new Tomato("Томатики", 550, 14, "red"));
 
-// cs.getRecipe(listCurrentProducts);
-// cs.getTotalCalories(listCurrentProducts);
+var listCurrentProducts = cs.getListProducts();
+// console.log(listCurrentProducts);
+
 
 var sortListRecipe = cs.listProducts.slice(0, cs.listProducts.length);
 sortListRecipe.sort(compareCalories);
-console.log(sortListRecipe);
+// console.log(sortListRecipe);
 
-// cs.getNewRecipe(sortListRecipe);
+
+
 
 
 var buttonRecipe = document.getElementById("buttonRecipe");
@@ -148,25 +171,24 @@ buttonRecipe.addEventListener("click", function(){
 	cs.getRecipe(listCurrentProducts);
 }, false);
 
-var buttonCalories = document.getElementById("buttonCalories");
-buttonCalories.addEventListener("click", function(){
-	cs.getTotalCalories(listCurrentProducts);
-}, false);
-
 var buttonNewRecipe = document.getElementById("buttonNewRecipe");
 buttonNewRecipe.addEventListener("click", function(){
 	cs.getNewRecipe(sortListRecipe);
 }, false);
 
+var buttonCalories = document.getElementById("buttonCalories");
+buttonCalories.addEventListener("click", function(){
+	cs.getTotalCalories(listCurrentProducts);
+}, false);
 
+var buttonFindVegetables = document.getElementById("buttonFindVegetables");
+buttonFindVegetables.addEventListener("click", function(){
+	findVegetables(listCurrentProducts, 19, "ginger");
+}, false);
 
-
-//Class Sorted by calories
-
-
-
-
-
+// cs.getNewRecipe(sortListRecipe);
+// cs.getRecipe(listCurrentProducts);
+// cs.getTotalCalories(listCurrentProducts);
 
 
 ////убрать методы с prototype
