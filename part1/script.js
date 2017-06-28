@@ -76,7 +76,6 @@ Cucumber.prototype = new CucurbitaceaeVeg();
 function CreateSalad() {
 	this.listProducts = [];
 	this.totalCalories = 0;
-	this.newListProducts = [];
 }
 //add product
 CreateSalad.prototype.addProduct = function(product) {
@@ -86,43 +85,38 @@ CreateSalad.prototype.addProduct = function(product) {
 CreateSalad.prototype.getListProducts = function() {
 	return this.listProducts;
 };
-//get new list of products
-CreateSalad.prototype.getNewListProducts = function() {
-	return this.newListProducts;
-};
-
 //get ready recipe
-CreateSalad.prototype.getRecipe = function() {
-	for (var i = 0; i < this.getListProducts().length; i++) {
-		if (this.getListProducts()[i].hasOwnProperty("calories")) {
+CreateSalad.prototype.getRecipe = function(listCurrentProducts) {
+	for (var i = 0; i < listCurrentProducts.length; i++) {
+		if (listCurrentProducts[i].hasOwnProperty("calories")) {
 			var insertLi = document.createElement("li");
-			insertLi.innerHTML = this.getListProducts()[i].name + " " + this.getListProducts()[i].weight + " г.";
+			insertLi.innerHTML = listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г.";
 			document.getElementById("recipeList").appendChild(insertLi);
 		}
 	}
 };
 //get ready new sort recipe
-CreateSalad.prototype.getNewRecipe = function() {
-	for (var i = 0; i < this.getNewListProducts().length; i++) {
-		if (this.getNewListProducts()[i].hasOwnProperty("calories")) {
+CreateSalad.prototype.getNewRecipe = function(listCurrentProducts) {
+	for (var i = 0; i < listCurrentProducts.length; i++) {
+		if (listCurrentProducts[i].hasOwnProperty("calories")) {
 			var insertLi = document.createElement("li");
-			insertLi.innerHTML = this.getNewListProducts()[i].name + " " + this.getNewListProducts()[i].weight + " г.";
+			insertLi.innerHTML = listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г. " + Math.round(listCurrentProducts[i].calories) + "ккал";
 			document.getElementById("newRecipeList").appendChild(insertLi);
 		}
 	}
 };
 
 //get total calories of salad
-CreateSalad.prototype.getTotalCalories = function() {
-	for (var i = 0; i < this.getListProducts().length; i++) {
-		if (this.getListProducts()[i].hasOwnProperty("calories")) {
-			this.totalCalories += this.getListProducts()[i].calories;
+CreateSalad.prototype.getTotalCalories = function(listCurrentProducts) {
+	for (var i = 0; i < listCurrentProducts.length; i++) {
+		if (listCurrentProducts[i].hasOwnProperty("calories")) {
+			this.totalCalories += Math.round(listCurrentProducts[i].calories);
 		}
 	}
 	var pTag = document.createElement("div");
-	pTag.innerHTML = "Общая калорийность салата: " + Math.round(this.totalCalories);
+	pTag.innerHTML = "Общая калорийность салата: " + this.totalCalories;
 	document.getElementById("recipe").appendChild(pTag);
-	return Math.round(this.totalCalories);
+	return this.totalCalories;
 };
 
 //sort objects by calories
@@ -135,17 +129,36 @@ var cs = new CreateSalad();
 cs.addProduct(new Cucumber("Огурец", 200, 35));
 cs.addProduct(new Carrot("Морковка", 300, 335));
 cs.addProduct(new Pumpkin("Тыква", 100, 50));
-// var listCurrentProducts = cs.getListProducts();
-// cs.getRecipe();
-cs.getTotalCalories();
+cs.addProduct(new Carrot("Морковка", 500, 335));
+cs.addProduct(new Pumpkin("Тыква", 350, 50));
+var listCurrentProducts = cs.getListProducts();
 
-cs.newListProducts = cs.listProducts.slice(0, cs.listProducts.length);
-cs.newListProducts.sort(compareCalories);
-cs.getNewRecipe(cs.newListProducts);
+// cs.getRecipe(listCurrentProducts);
+// cs.getTotalCalories(listCurrentProducts);
 
-var buttonCalories = document.getElementById("buttonRecipe");
-buttonCalories.addEventListener("click", cs.getRecipe, false);
-// console.log(cs.getTotalCalories());
+var sortListRecipe = cs.listProducts.slice(0, cs.listProducts.length);
+sortListRecipe.sort(compareCalories);
+console.log(sortListRecipe);
+
+// cs.getNewRecipe(sortListRecipe);
+
+
+var buttonRecipe = document.getElementById("buttonRecipe");
+buttonRecipe.addEventListener("click", function(){
+	cs.getRecipe(listCurrentProducts);
+}, false);
+
+var buttonCalories = document.getElementById("buttonCalories");
+buttonCalories.addEventListener("click", function(){
+	cs.getTotalCalories(listCurrentProducts);
+}, false);
+
+var buttonNewRecipe = document.getElementById("buttonNewRecipe");
+buttonNewRecipe.addEventListener("click", function(){
+	cs.getNewRecipe(sortListRecipe);
+}, false);
+
+
 
 
 //Class Sorted by calories
