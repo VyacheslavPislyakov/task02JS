@@ -19,13 +19,25 @@
 }
 #buttons{
 	top: 100px;
+	right: 10px;
 	border: solid black 1px;
 	position: absolute;
-	width: 300px;
-	/*height: 300px;*/
 	left: 80%;
 	text-align: center;
-	padding: 30px;
+	padding: 10px;
+}
+
+#newRecipe{
+	border: solid black 1px;
+	position: absolute;
+	top: 100px;
+	left: 40%;
+	width: 500px;
+	text-align: letf;
+}
+
+h1{
+	text-align: center;
 }
 
 input{

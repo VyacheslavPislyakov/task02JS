@@ -76,13 +76,22 @@ Cucumber.prototype = new CucurbitaceaeVeg();
 function CreateSalad() {
 	this.listProducts = [];
 	this.totalCalories = 0;
+	this.newListProducts = [];
 }
+//add product
 CreateSalad.prototype.addProduct = function(product) {
 	this.listProducts.push(product);
 };
+//get list of products
 CreateSalad.prototype.getListProducts = function() {
 	return this.listProducts;
 };
+//get new list of products
+CreateSalad.prototype.getNewListProducts = function() {
+	return this.newListProducts;
+};
+
+//get ready recipe
 CreateSalad.prototype.getRecipe = function() {
 	for (var i = 0; i < this.getListProducts().length; i++) {
 		if (this.getListProducts()[i].hasOwnProperty("calories")) {
@@ -92,7 +101,18 @@ CreateSalad.prototype.getRecipe = function() {
 		}
 	}
 };
+//get ready new sort recipe
+CreateSalad.prototype.getNewRecipe = function() {
+	for (var i = 0; i < this.getNewListProducts().length; i++) {
+		if (this.getNewListProducts()[i].hasOwnProperty("calories")) {
+			var insertLi = document.createElement("li");
+			insertLi.innerHTML = this.getNewListProducts()[i].name + " " + this.getNewListProducts()[i].weight + " г.";
+			document.getElementById("newRecipeList").appendChild(insertLi);
+		}
+	}
+};
 
+//get total calories of salad
 CreateSalad.prototype.getTotalCalories = function() {
 	for (var i = 0; i < this.getListProducts().length; i++) {
 		if (this.getListProducts()[i].hasOwnProperty("calories")) {
@@ -100,33 +120,32 @@ CreateSalad.prototype.getTotalCalories = function() {
 		}
 	}
 	var pTag = document.createElement("div");
-	pTag.innerHTML = "Общая калорийность салата - " + Math.round(this.totalCalories);
+	pTag.innerHTML = "Общая калорийность салата: " + Math.round(this.totalCalories);
 	document.getElementById("recipe").appendChild(pTag);
 	return Math.round(this.totalCalories);
 };
 
+//sort objects by calories
 function compareCalories(personA, personB) {
 	return personA.calories - personB.calories;
 }
+
 
 var cs = new CreateSalad();
 cs.addProduct(new Cucumber("Огурец", 200, 35));
 cs.addProduct(new Carrot("Морковка", 300, 335));
 cs.addProduct(new Pumpkin("Тыква", 100, 50));
-cs.getRecipe();
-console.log(cs.getListProducts());
+// var listCurrentProducts = cs.getListProducts();
+// cs.getRecipe();
+cs.getTotalCalories();
 
-// var sortProducts = cs.getListProducts();
-// sortProducts.sort(compareCalories);
-// console.log(sortProducts);
+cs.newListProducts = cs.listProducts.slice(0, cs.listProducts.length);
+cs.newListProducts.sort(compareCalories);
+cs.getNewRecipe(cs.newListProducts);
 
-var testmas = cs.listProducts.slice(0, cs.listProducts.length);
-testmas.sort(compareCalories);
-console.log(testmas);
-
-// var buttonCalories = document.getElementById("buttonCalories");
-// buttonCalories.addEventListener("click", cs.getRecipe());
-console.log(cs.getTotalCalories());
+var buttonCalories = document.getElementById("buttonRecipe");
+buttonCalories.addEventListener("click", cs.getRecipe, false);
+// console.log(cs.getTotalCalories());
 
 
 //Class Sorted by calories
