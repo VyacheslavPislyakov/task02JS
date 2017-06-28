@@ -84,7 +84,6 @@ Cucumber.prototype = new CucurbitaceaeVeg();
 function CreateSalad() {
 	this.listProducts = [];
 	this.totalCalories = 0;
-	// this.curre
 }
 //add product
 CreateSalad.prototype.addProduct = function(product) {
@@ -105,6 +104,7 @@ CreateSalad.prototype.getRecipe = function(listCurrentProducts) {
 	for (var i = 0; i < listCurrentProducts.length; i++) {
 		if (listCurrentProducts[i].hasOwnProperty("calories")) {
 			var insertLi = document.createElement("li");
+			insertLi.id = "recipeLi";
 			insertLi.innerHTML = listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г.";
 			document.getElementById("recipeList").appendChild(insertLi);
 		}
@@ -114,6 +114,7 @@ CreateSalad.prototype.getRecipe = function(listCurrentProducts) {
 CreateSalad.prototype.getNewRecipe = function(listCurrentProducts) {
 	for (var i = 0; i < listCurrentProducts.length; i++) {
 		if (listCurrentProducts[i].hasOwnProperty("calories")) {
+
 			var insertLi = document.createElement("li");
 			insertLi.innerHTML = listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г. " + Math.round(listCurrentProducts[i].calories) + "ккал";
 			document.getElementById("newRecipeList").appendChild(insertLi);
@@ -129,10 +130,14 @@ CreateSalad.prototype.getTotalCalories = function(listCurrentProducts) {
 			this.totalCalories += Math.round(listCurrentProducts[i].calories);
 		}
 	}
-	var pTag = document.createElement("div");
-	pTag.innerHTML = "Общая калорийность салата: " + this.totalCalories;
-	pTag.id = "TotalCalories";
-	document.getElementById("recipe").appendChild(pTag);
+	if (document.getElementById("TotalCalories") === null){
+		var pTag = document.createElement("div");
+		pTag.innerHTML = "Общая калорийность салата: " + this.totalCalories;
+		pTag.id = "TotalCalories";
+		document.getElementById("recipe").appendChild(pTag);
+	} else {
+		document.getElementById("TotalCalories").innerHTML = "Общая калорийность салата: " + this.totalCalories;
+	}
 	return this.totalCalories;
 };
 
@@ -166,14 +171,9 @@ cs.addProduct(new Tomato("Томатики", 550, 14, "red"));
 var listCurrentProducts = cs.getListProducts();
 // console.log(listCurrentProducts);
 
-
 var sortListRecipe = cs.listProducts.slice(0, cs.listProducts.length);
 sortListRecipe.sort(compareCalories);
 // console.log(sortListRecipe);
-
-
-
-
 
 var buttonRecipe = document.getElementById("buttonRecipe");
 buttonRecipe.addEventListener("click", function(){
@@ -194,10 +194,5 @@ var buttonFindVegetables = document.getElementById("buttonFindVegetables");
 buttonFindVegetables.addEventListener("click", function(){
 	findVegetables(listCurrentProducts, 19, "ginger");
 }, false);
-
-// cs.getNewRecipe(sortListRecipe);
-// cs.getRecipe(listCurrentProducts);
-// cs.getTotalCalories(listCurrentProducts);
-
 
 ////убрать методы с prototype
