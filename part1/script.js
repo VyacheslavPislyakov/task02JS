@@ -84,15 +84,22 @@ Cucumber.prototype = new CucurbitaceaeVeg();
 function CreateSalad() {
 	this.listProducts = [];
 	this.totalCalories = 0;
+	// this.curre
 }
 //add product
 CreateSalad.prototype.addProduct = function(product) {
 	this.listProducts.push(product);
 };
+
 //get list of products
 CreateSalad.prototype.getListProducts = function() {
 	return this.listProducts;
 };
+//set list of products
+CreateSalad.prototype.setListProducts = function() {
+	this.listProducts;
+};
+
 //get ready recipe
 CreateSalad.prototype.getRecipe = function(listCurrentProducts) {
 	for (var i = 0; i < listCurrentProducts.length; i++) {
@@ -116,6 +123,7 @@ CreateSalad.prototype.getNewRecipe = function(listCurrentProducts) {
 
 //get total calories of salad
 CreateSalad.prototype.getTotalCalories = function(listCurrentProducts) {
+	this.totalCalories = 0;
 	for (var i = 0; i < listCurrentProducts.length; i++) {
 		if (listCurrentProducts[i].hasOwnProperty("calories")) {
 			this.totalCalories += Math.round(listCurrentProducts[i].calories);
@@ -123,6 +131,7 @@ CreateSalad.prototype.getTotalCalories = function(listCurrentProducts) {
 	}
 	var pTag = document.createElement("div");
 	pTag.innerHTML = "Общая калорийность салата: " + this.totalCalories;
+	pTag.id = "TotalCalories";
 	document.getElementById("recipe").appendChild(pTag);
 	return this.totalCalories;
 };
