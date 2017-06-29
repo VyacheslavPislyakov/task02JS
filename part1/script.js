@@ -35,10 +35,11 @@ CucurbitaceaeVeg.prototype = new Vegetables();
 
 
 //Class Tomato
-function Tomato(name, weight, stamen, calories, color) {
+function Tomato(name, weight, stamen, calories, color, sort) { //add sort
 	NightshadeVeg.call(this, name, weight, stamen);
 	this.calories = calories * (100 / weight);
 	this.color = color;
+	this.sort = sort;
 }
 Tomato.prototype = new NightshadeVeg();
 
@@ -51,26 +52,29 @@ function Eggplant(name, weight, stamen, calories, color) {
 Eggplant.prototype = new NightshadeVeg();
 
 //Class Carrot
-function Carrot(name, weight, family, calories, color) {
+function Carrot(name, weight, family, calories, color, eyes) { //add eyes
 	RootVeg.call(this, name, weight, family);
 	this.calories = calories * (100 / weight);
 	this.color = color;
+	this.eyes = eyes;
 }
 Carrot.prototype = new RootVeg();
 
 //Class Beet
-function Beet(name, weight, family, calories, color) {
+function Beet(name, weight, family, calories, color, kind) { //add kind
 	RootVeg.call(this, name, weight, family);
 	this.calories = calories * (100 / weight);
 	this.color = color;
+	this.kind = kind;
 }
 Beet.prototype = new RootVeg();
 
 //Class Pumpkin
-function Pumpkin(name, weight, use, calories, color) {
+function Pumpkin(name, weight, use, calories, color, destination) { //add destination
 	CucurbitaceaeVeg.call(this, name, weight, use);
 	this.calories = calories * (100 / weight);
 	this.color = color;
+	this.destination = destination;
 }
 Pumpkin.prototype = new CucurbitaceaeVeg();
 
@@ -106,10 +110,14 @@ function CreateSalad() {
 	this.getRecipe = function(listCurrentProducts) {
 		for (var i = 0; i < listCurrentProducts.length; i++) {
 			if (listCurrentProducts[i].hasOwnProperty("calories")) {
-				var insertLi = document.createElement("li");
-				insertLi.id = "recipeLi";
-				insertLi.innerHTML = listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г.";
-				document.getElementById("recipeList").appendChild(insertLi);
+				if((document.getElementById("recipeLi" + i) !== null) && (document.getElementById("recipeLi" + i).innerHTML === listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г.")) {
+					continue;
+				} else {
+					var insertLi = document.createElement("li");
+					insertLi.id = "recipeLi" + i;
+					insertLi.innerHTML = listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г.";
+					document.getElementById("recipeList").appendChild(insertLi);
+				}
 			}
 		}
 	};
@@ -117,10 +125,14 @@ function CreateSalad() {
 	this.getNewRecipe = function(listCurrentProducts) {
 		for (var i = 0; i < listCurrentProducts.length; i++) {
 			if (listCurrentProducts[i].hasOwnProperty("calories")) {
-
-				var insertLi = document.createElement("li");
-				insertLi.innerHTML = listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г. " + Math.round(listCurrentProducts[i].calories) + "ккал";
-				document.getElementById("newRecipeList").appendChild(insertLi);
+				if((document.getElementById("newRecipeLi" + i) !== null) && (document.getElementById("newRecipeLi" + i).innerHTML === listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г. " + Math.round(listCurrentProducts[i].calories) + "ккал")) {
+					continue;
+				} else {
+					var insertLi = document.createElement("li");
+					insertLi.id = "newRecipeLi" + i;
+					insertLi.innerHTML = listCurrentProducts[i].name + " " + listCurrentProducts[i].weight + " г. " + Math.round(listCurrentProducts[i].calories) + "ккал";
+					document.getElementById("newRecipeList").appendChild(insertLi);
+				}
 			}
 		}
 	};
@@ -155,7 +167,7 @@ function findVegetables(listCurrentProducts) {
 			alert("Овощь с параметрами " + listCurrentProducts[i].calories + " ккал и " + listCurrentProducts[i].color + " цвета - " + listCurrentProducts[i].name);
 			break;
 		} else if ((isNaN(calories)) || (color === "")) {
-			alert("Введите значения");
+			alert("Введите значения полей");
 			break;
 		} else {
 			alert("Нету такого овоща с параметрами " + calories + " ккал и " + color + " цвета");
@@ -171,10 +183,10 @@ function compareCalories(personA, personB) {
 
 var cs = new CreateSalad();
 cs.addProduct(new Cucumber("Огурец", 200, "Съедобные", 10, "green"));
-cs.addProduct(new Carrot("Морковка", 300, "Зонтичные", 33, "orange"));
-cs.addProduct(new Pumpkin("Тыква", 100, "Съедобные", 19, "ginger"));
-cs.addProduct(new Beet("Свеколочка", 350, "Амарантовые", 48, "purple"));
-cs.addProduct(new Tomato("Томатики", 550, 4, 14, "red"));
+cs.addProduct(new Carrot("Морковка", 300, "Зонтичные", 33, "orange", 4));
+cs.addProduct(new Pumpkin("Тыква", 100, "Съедобные", 19, "ginger", "Для употребления в пищу"));
+cs.addProduct(new Beet("Свеколочка", 350, "Амарантовые", 48, "purple", "сахарная"));
+cs.addProduct(new Tomato("Томатики", 550, 4, 14, "red", "Бычье сердце"));
 
 var listCurrentProducts = cs.getListProducts();
 console.log(listCurrentProducts);
