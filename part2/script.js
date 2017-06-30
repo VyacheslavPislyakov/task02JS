@@ -7,7 +7,7 @@ var Car = {
 	}
 };
 
-var SportCar = {};
+var SpeenCar = {};
 
 function extendDeep(parent, child) {
 	var i,
@@ -29,7 +29,7 @@ function extendDeep(parent, child) {
 }
 
 
-var fastCar = extendDeep(SportCar,Car);
+var fastCar = extendDeep(Car, SpeenCar);
 fastCar.name = "Mercedes";
 fastCar.model = "E350";
 fastCar.maxSpeed = 350;
@@ -37,6 +37,11 @@ fastCar.chiping.status = true;
 fastCar.chiping.company = "AMG";
 
 var elem = document.createElement("div");
-elem.innerHTML = "Name: " + fastCar.name + " Model: " + fastCar.model + " Type: " + fastCar.type +" Max.Speed: " + fastCar.maxSpeed + " Wheels: " + fastCar.wheels + " Chiping: " + fastCar.chiping.status + " company " + fastCar.chiping.company;
-console.log(fastCar);
+elem.innerHTML = "Parent property: Name: " + Car.name + " Type: " + Car.type + " Wheels: " + Car.wheels + " Chiping: " + Car.chiping.status;
+// console.log(fastCar);
 document.body.appendChild(elem);
+
+var elem1 = document.createElement("div");
+elem1.innerHTML = "Child property Name: " + fastCar.name + " Model: " + fastCar.model + " Type: " + fastCar.type +" Max.Speed: " + fastCar.maxSpeed + " Wheels: " + fastCar.wheels + " Chiping: " + fastCar.chiping.status + " company " + fastCar.chiping.company;
+console.log(fastCar);
+document.body.appendChild(elem1);
